@@ -4,6 +4,7 @@ import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
+import java.util.Comparator;
 import java.util.List;
 
 @Component
@@ -18,8 +19,18 @@ public class ClientModel {
     public SendMessage getAll(Update update){
         List<Client> clients = clientService.getAll();
 
+        class ClientComparator implements Comparator<Client> {
+
+            public int compare(Client a, Client b){
+
+                return a.getId().compareTo(b.getId());
+            }
+        }
+
+        clients.sort(new ClientComparator());
+
         StringBuilder stringBuilder = new StringBuilder();
-        clients.forEach(client -> stringBuilder.append(String.format("%s: %d", client.getName(), client.getCount())).append("\n"));
+        clients.forEach(client -> stringBuilder.append(String.format("%d.%s: %d", client.getId(),client.getName(), client.getCount())).append("\n"));
 
         SendMessage message = new SendMessage();
         message.setChatId(update.getMessage().getChatId().toString());
