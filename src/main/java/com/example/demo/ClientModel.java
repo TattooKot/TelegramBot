@@ -58,4 +58,12 @@ public class ClientModel {
 
         return new SendMessage(chatId,clientService.getById(id).toString());
     }
+
+    public SendMessage bestFrau(Update update){
+        SendMessage message = new SendMessage();
+        message.setChatId(update.getMessage().getChatId().toString());
+        message.setText("You the best frau ever ;)");
+
+        return message;
+    }
 }
