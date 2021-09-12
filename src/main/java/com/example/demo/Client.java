@@ -3,6 +3,7 @@ package com.example.demo;
 import javax.management.InstanceNotFoundException;
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 @Table(name = "clients")
 @Entity
@@ -32,8 +33,8 @@ public class Client{
     public String toString() {
 
         String result = name + "\n"
-                + "From: " + payday + "\n"
-                + "To: " + lastday + "\n"
+                + "From: " + payday.format(DateTimeFormatter.ofPattern("dd-MM-yy")) + "\n"
+                + "To: " + lastday.format(DateTimeFormatter.ofPattern("dd-MM-yy")) + "\n"
                 + "Count: " + count + "\n";
         if(phone != null)
             result += "Phone: " + phone;
