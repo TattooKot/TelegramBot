@@ -43,14 +43,16 @@ public class ClientModel {
         String request = update.getMessage().getText();
         String chatId = update.getMessage().getChatId().toString();
 
-        if(request.length() <= 3 || request.length() > 6)
+        if(request.length() > 3 && request.length() <= 5)
+           request = request.substring(3);
+
+        if(request.length() > 6)
             return new SendMessage(chatId,"Щоб отримати інформацію, виконай команду id {id}");
 
-        String stringId = request.substring(3);
-        if(!stringId.matches("[0-9]+"))
+        if(!request.matches("[0-9]+"))
             return new SendMessage(chatId,"Id це тільки цифри, спробуй ще раз! \n");
 
-        int id = Integer.parseInt(stringId);
+        int id = Integer.parseInt(request);
         if(!clientService.checkById(id))
             return new SendMessage(chatId,"Id не знайдено, спробуй ще раз! \n");
 
