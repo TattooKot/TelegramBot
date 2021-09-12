@@ -6,7 +6,7 @@ import java.time.LocalDate;
 
 @Table(name = "clients")
 @Entity
-public class Client implements Comparable{
+public class Client{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,7 +30,15 @@ public class Client implements Comparable{
 
     @Override
     public String toString() {
-        return String.format("%s: %d", name,count);
+
+        String result = name + "\n"
+                + "From: " + payday + "\n"
+                + "To: " + lastday + "\n"
+                + "Count: " + count + "\n";
+        if(phone != null)
+            result += "Phone: " + phone;
+
+        return result;
     }
 
     public Integer getCount() {
@@ -81,18 +89,4 @@ public class Client implements Comparable{
         this.id = id;
     }
 
-    @Override
-    public int compareTo(Object o) {
-        if(o instanceof Client){
-            Client c = (Client) o;
-            return id-c.getId();
-        }
-        try {
-            throw new InstanceNotFoundException();
-        } catch (InstanceNotFoundException e) {
-            e.printStackTrace();
-        }
-
-        return 0;
-    }
 }
