@@ -36,7 +36,7 @@ public class Client{
                 + "From: " + payday.format(DateTimeFormatter.ofPattern("dd-MM-yy")) + "\n"
                 + "To: " + lastday.format(DateTimeFormatter.ofPattern("dd-MM-yy")) + "\n"
                 + "Count: " + count + "\n";
-        if(phone != null)
+        if(phone != null && !phone.isEmpty())
             result += "Phone: " + phone;
 
         return result;
