@@ -47,7 +47,7 @@ public class ClientModel {
            request = request.substring(3);
 
         if(request.length() > 6)
-            return new SendMessage(chatId,"Щоб отримати інформацію, виконай команду id {id}");
+            return new SendMessage(chatId,"Щоб отримати інформацію, виконай команду id {id}, або {id}");
 
         if(!request.matches("[0-9]+"))
             return new SendMessage(chatId,"Id це тільки цифри, спробуй ще раз! \n");

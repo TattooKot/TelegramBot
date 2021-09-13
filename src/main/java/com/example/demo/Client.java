@@ -29,12 +29,15 @@ public class Client{
     @Column(name = "count")
     private Integer count;
 
+    @Column(name = "frequency")
+    private LocalDate[] frequency;
+
     @Override
     public String toString() {
 
         String result = name + "\n"
-                + "From: " + payday.format(DateTimeFormatter.ofPattern("dd-MM-yy")) + "\n"
-                + "To: " + lastday.format(DateTimeFormatter.ofPattern("dd-MM-yy")) + "\n"
+                + "From: " + payday.format(DateTimeFormatter.ofPattern("dd.MM.yy")) + "\n"
+                + "To: " + lastday.format(DateTimeFormatter.ofPattern("dd.MM.yy")) + "\n"
                 + "Count: " + count + "\n";
         if(phone != null && !phone.isEmpty())
             result += "Phone: " + phone;

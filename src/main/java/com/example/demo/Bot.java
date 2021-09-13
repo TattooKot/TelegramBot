@@ -19,7 +19,6 @@ public class Bot extends TelegramLongPollingBot {
     public void onUpdateReceived(Update update) {
         if(update.hasMessage() && update.getMessage().hasText()){
             String request = update.getMessage().getText();
-            String chatId = update.getMessage().getChatId().toString();
 
             if(request.equals("/get_all"))
                 send(controller.getAll(update));
@@ -42,7 +41,6 @@ public class Bot extends TelegramLongPollingBot {
             e.printStackTrace();
         }
     }
-
 
     @Override
     public String getBotUsername() {
