@@ -1,14 +1,15 @@
 package com.example.demo;
 
-import javax.management.InstanceNotFoundException;
+import org.hibernate.annotations.Type;
+
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
-@Table(name = "clients")
+@Table(name = "clients", indexes = {
+        @Index(name = "idx_client_frequency", columnList = "frequency")
+})
 @Entity
-public class Client{
-
+public class Client {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -29,17 +30,16 @@ public class Client{
     @Column(name = "count")
     private Integer count;
 
-    @Override
-    public String toString() {
+    @Type( type = "string-array" )
+    @Column(name = "frequency")
+    private String[] frequency;
 
-        String result = name + "\n"
-                + "From: " + payday.format(DateTimeFormatter.ofPattern("dd-MM-yy")) + "\n"
-                + "To: " + lastday.format(DateTimeFormatter.ofPattern("dd-MM-yy")) + "\n"
-                + "Count: " + count + "\n";
-        if(phone != null && !phone.isEmpty())
-            result += "Phone: " + phone;
+    public String[] getFrequency() {
+        return frequency;
+    }
 
-        return result;
+    public void setFrequency(String[] frequency) {
+        this.frequency = frequency;
     }
 
     public Integer getCount() {
@@ -89,5 +89,4 @@ public class Client{
     public void setId(Integer id) {
         this.id = id;
     }
-
 }
